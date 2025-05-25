@@ -1,22 +1,20 @@
 const { Sequelize } = require('sequelize');
-
+require('dotenv').config();
 const sequelize = new Sequelize(
-  'postgres', // database name
-  'postgres.asvzyefrvciaucjxqapc', // username
-  'bitespeed123', // password (replace with your actual password)
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASS,
   {
-    host: 'aws-0-ap-south-1.pooler.supabase.com',
-    port: 6543,
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
     dialect: 'postgres',
     dialectOptions: {
       ssl: {
         require: true,
-        rejectUnauthorized: false // Needed for most managed Postgres services
+        rejectUnauthorized: false
       }
     }
   }
 );
 
 module.exports = sequelize;
-
-//postgresql://postgres:bitespeed123@db.asvzyefrvciaucjxqapc.supabase.co:5432/postgres
